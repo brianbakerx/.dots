@@ -43,7 +43,7 @@ bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
 # History
-HISTSIZE=10000                 # Size of zsh history
+HISTSIZE=100000                 # Size of zsh history
 HISTFILE=~/.zsh_history       # File containing history
 SAVEHIST=$HISTSIZE            # Same as HISTSIZE
 HISTDUP=erase                 # Erase duplicates in history file
@@ -87,7 +87,7 @@ alias ext='cd /Volumes/EXT4TB'
 alias ic='cd /Users/brian/Library/Mobile\ Documents/com~apple~CloudDocs'
 alias wtf-news='wtfutil --config=/Users/brian/.config/wtf/news.yml'
 alias wtf-reddit='wtfutil --config=/Users/brian/.config/wtf/subreddit.yml'
-alias .git='git --git-dir=$HOME/dots/ --work-tree=$HOME'
+alias .git='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias python='python3'
 
 alias fzb='fzf --preview "bat --style=numbers --color=always {}"'
