@@ -1,0 +1,14 @@
+wtf:
+  mods:
+    subreddit:
+      enabled: true
+      numberOfPosts: 25
+      position:
+        top: 0
+        left: 0
+        height: 1
+        width: 2
+      refreshInterval: 15m
+      sortOrder: top
+      subreddit: "learnsql"
+      topTimePeriod: month

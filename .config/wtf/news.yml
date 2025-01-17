@@ -1,0 +1,14 @@
+wtf:
+  mods:
+   feedreader:
+      enabled: true
+      feeds:
+      # - http://www.memeorandum.com/feed.xml
+      - https://www.techmeme.com/feed.xml
+      feedLimit: 15
+      position:
+        top: 0
+        left: 0
+        height: 2
+        width: 1
+      refreshInterval: 30 

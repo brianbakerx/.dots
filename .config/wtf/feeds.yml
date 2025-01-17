@@ -1,0 +1,14 @@
+wtf:
+  mods:
+    feedreader:
+      enabled: true
+      feeds:
+      - https://news.ycombinator.com/rss
+      - https://www.techmeme.com/feed.xml
+      feedLimit: 20
+      position:
+        top: 4
+        left: 1
+        height: 1
+        width: 2
+      refreshInterval: 30
