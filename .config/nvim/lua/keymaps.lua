@@ -60,3 +60,6 @@ map('n', '-', '<cmd>Oil<CR>')
 -- Navigate through quickfix list
 map('n', '<A-j>', '<cmd>cnext<CR>')
 map('n', '<A-k>', '<cmd>cprev<CR>')
+
+-- setup mapping to call :LazyGit
+map('n', '<leader>gg', ':LazyGit<CR>')
