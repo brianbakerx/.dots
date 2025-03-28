@@ -68,6 +68,10 @@ export FZF_DEFAULT_OPTS="
 	--color=spinner:#f6c177,info:#9ccfd8
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
+#Neovim as default editor
+export EDITOR="nvim"
+export VISUAL="nvim"
+
 # Aliases
 alias l='ls -l --color'
 alias lk='ls -lathr --color'
@@ -129,3 +133,5 @@ export NVM_DIR="$HOME/.nvm"
 
 #Zoxide
 eval "$(zoxide init zsh)"
+
+. "$HOME/.local/bin/env"

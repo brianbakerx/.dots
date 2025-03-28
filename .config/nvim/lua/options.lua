@@ -66,3 +66,8 @@ set.inccommand = 'split'
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
+-- Set the Python 3 interpreter path
+vim.g.python3_host_prog = '/usr/local/bin/python3'  -- Change this to your Python 3 path
+
+vim.g.codeium_enabled = false

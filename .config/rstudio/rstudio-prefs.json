@@ -6,10 +6,12 @@
     "posix_terminal_shell": "bash",
     "default_open_project_location": "/Users/brian/Projects",
     "python_type": "system",
-    "python_version": "3.12.5",
+    "python_version": "3.13.2",
     "python_path": "/usr/local/bin/python3",
     "jobs_tab_visibility": "shown",
     "rmd_viewer_type": "pane",
     "default_project_location": "/Users/brian/Documents/r_work",
-    "insert_native_pipe_operator": true
+    "insert_native_pipe_operator": true,
+    "code_formatter": "external",
+    "code_formatter_external_command": "/Users/brian/.local/bin/air"
 }
