@@ -16,8 +16,6 @@ autoload -U promptinit; promptinit
 # optionally define some options
 PURE_CMD_MAX_EXEC_TIME=10
 
-prompt pure
-
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
 
@@ -73,9 +71,10 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # Aliases
-alias l='ls -l --color'
-alias lk='ls -lathr --color'
-alias ll='ls -lAh --color'
+alias l='eza -l'
+alias ll='eza -lAh'
+alias lt='eza --long --tree --level=3'
+alias lg='eza --long --header --inode --git'
 alias vim='nvim'
 alias c='clear'
 alias ..='cd ..'
@@ -135,3 +134,5 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(zoxide init zsh)"
 
 . "$HOME/.local/bin/env"
+
+prompt pure
