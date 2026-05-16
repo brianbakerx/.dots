@@ -1,4 +1,5 @@
 export PATH="/Users/brian/Library/Python/3.9/bin:$PATH"
+export PATH="/Users/brian/.duckdb/cli/latest":$PATH
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
@@ -40,9 +41,9 @@ alias wtf-reddit='wtfutil --config=/Users/brian/.config/wtf/subreddit.yml'
 alias .git='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias python="$HOME/.local/share/uv/python/cpython-3.13.7-macos-x86_64-none/bin/python3.13"
 
-alias fzb='fzf --preview "bat --style=numbers --color=always {}"'
-alias fzn='vim $(fzf --preview="bat --style=numbers --color=always {}")'
-alias fznm='vim $(fzf -m --preview="bat --style=numbers --color=always {}")'
+alias fzfp='fzf --preview "bat --style=numbers --color=always {}"'
+alias fzfn='nvim $(fzf --preview="bat --style=numbers --color=always {}")'
+alias fzfnm='nvim $(fzf -m --preview="bat --style=numbers --color=always {}")'
 
 # Pomodoro Timer - https://github.com/caarlos0/timer
 # brew install caarlos0/tap/timer
@@ -80,3 +81,4 @@ eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(zoxide init zsh)"
+export PATH="$HOME/bin:$PATH"
