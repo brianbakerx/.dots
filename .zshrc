@@ -1,8 +1,13 @@
 export PATH="/Users/brian/Library/Python/3.9/bin:$PATH"
 export PATH="/Users/brian/.duckdb/cli/latest":$PATH
 
-export HISTSIZE=1000000000
-export SAVEHIST=$HISTSIZE
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+HISTSIZE=50000
+SAVEHIST=50000
+HISTFILE="$HOME/.zsh_history"
 setopt EXTENDED_HISTORY
 setopt autocd
 autoload -U compinit; compinit
@@ -18,31 +23,57 @@ export FZF_DEFAULT_OPTS="
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-# Aliases
+# Shortcuts
 alias l='eza -l'
 alias ll='eza -lAh'
 alias lt='eza --long --tree --level=3'
 alias lg='eza --long --header --inode --git'
 alias vim='nvim'
-alias c='clear'
-alias ..='cd ..'
+
+# Navigation aliases
 alias ~='cd ~'
-alias zshconfig="vim ~/.zshrc"
-alias kittyconfig="vim ~/.config/kitty/kitty.conf"
-alias nvimconfig="vim ~/.config/nvim/init.lua"
-alias vimconfig="vi ~/.vimrc"
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias c='clear'
+
+# ZSH config
+alias zreload='source ~/.zshrc'
+alias zedit='nvim ~/.zshrc'
+alias kedit="nvim ~/.config/kitty/kitty.conf"
+alias vedit="vi ~/.vimrc"
+
+# Neovim distro shortcuts
 alias vim-k='NVIM_APPNAME="nvim-kickstart" nvim'
 alias vim-q='NVIM_APPNAME="nvim-quarto" nvim'
+
+# R shortcut for clean execution
 alias R='R --no-save --no-restore-data'
+
+#Directory shortcuts
 alias ext='cd /Volumes/EXT4TB'
 alias ic='cd /Users/brian/Library/Mobile\ Documents/com~apple~CloudDocs'
+
+#WTF shortcuts
 alias wtf-news='wtfutil --config=/Users/brian/.config/wtf/news.yml'
 alias wtf-reddit='wtfutil --config=/Users/brian/.config/wtf/subreddit.yml'
-alias gitloggraph='git log --oneline --decorate --graph --all -10'
+
+#Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
+alias gp='git push'
+alias gl='git log --oneline --decorate --graph --all -10'
+alias gpl='git pull'
 alias .git='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 
-# Workspace metadata helpers
+#Workspace shortcuts
+alias cdt='cd ~/tools'
+alias cdws='cd ~/workspace'
+alias cdwst='cd ~/workspace/tutorials'
+alias cdwsp='cd ~/workspace/projects'
 
+# Workspace metadata helpers
 wsmn() {
     local files
     files=$(fd meta.yaml ~/workspace \
@@ -60,10 +91,14 @@ wsms() {
         return 1
     fi
 
-    rg -l "$1" ~/workspace/**/meta.yaml \
-    | fzf -m \
-      --preview 'yq {} | bat --language=yaml --style=full --color=always' \
-    | xargs nvim
+    local files
+    files=$(rg -l "$1" ~/workspace/**/meta.yaml \
+        | fzf -m \
+          --preview 'yq {} | bat --language=yaml --style=full --color=always')
+
+    [[ -z "$files" ]] && return
+
+    echo "$files" | xargs nvim
 }
 
 # Pomodoro Timer - https://github.com/caarlos0/timer
