@@ -28,7 +28,6 @@ alias l='eza -l'
 alias ll='eza -lAh'
 alias lt='eza --long --tree --level=3'
 alias lg='eza --long --header --inode --git'
-alias vim='nvim'
 
 # Navigation aliases
 alias ~='cd ~'
@@ -43,9 +42,18 @@ alias zedit='nvim ~/.zshrc'
 alias kedit="nvim ~/.config/kitty/kitty.conf"
 alias vedit="vi ~/.vimrc"
 
-# Neovim distro shortcuts
-alias vim-k='NVIM_APPNAME="nvim-kickstart" nvim'
-alias vim-q='NVIM_APPNAME="nvim-quarto" nvim'
+# Python workflow aliases
+alias py="python3"
+alias pipi="python3 -m pip"
+alias uvpy="uv run python"
+
+pywhere() {
+    echo "python:  $(command -v python 2>/dev/null)"
+    echo "python3: $(command -v python3 2>/dev/null)"
+    echo "pip:     $(command -v pip 2>/dev/null)"
+    echo "pipx:    $(command -v pipx 2>/dev/null)"
+    echo "uv:      $(command -v uv 2>/dev/null)"
+}
 
 # R shortcut for clean execution
 alias R='R --no-save --no-restore-data'
@@ -74,6 +82,34 @@ alias cdwst='cd ~/workspace/tutorials'
 alias cdwsp='cd ~/workspace/projects'
 
 # Workspace metadata helpers
+
+# fuzzy open one file
+fzo() {
+    local file
+
+    file=$(fd --type f . . \
+        | fzf \
+          --preview 'bat --style=full --color=always {}')
+
+    [[ -z "$file" ]] && return
+
+    nvim "$file"
+}
+
+# fuzzy open multiple files in nvim
+fzn() {
+    local -a files
+
+    files=("${(@f)$(fd --type f . . \
+        | fzf -m \
+          --preview 'bat --style=full --color=always {}')}")
+
+    [[ ${#files[@]} -eq 0 ]] && return
+
+    nvim "${files[@]}"
+}
+
+# workspace metadata multi-open
 wsmn() {
     local files
     files=$(fd meta.yaml ~/workspace \
@@ -85,6 +121,7 @@ wsmn() {
     echo "$files" | xargs nvim
 }
 
+# workspace metadata search
 wsms() {
     if [[ -z "$1" ]]; then
         echo "Usage: wsms <search-term>"
