@@ -38,12 +38,33 @@ alias ext='cd /Volumes/EXT4TB'
 alias ic='cd /Users/brian/Library/Mobile\ Documents/com~apple~CloudDocs'
 alias wtf-news='wtfutil --config=/Users/brian/.config/wtf/news.yml'
 alias wtf-reddit='wtfutil --config=/Users/brian/.config/wtf/subreddit.yml'
+alias gitloggraph='git log --oneline --decorate --graph --all -10'
 alias .git='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
-alias python="$HOME/.local/share/uv/python/cpython-3.13.7-macos-x86_64-none/bin/python3.13"
 
-alias fzfp='fzf --preview "bat --style=numbers --color=always {}"'
-alias fzfn='nvim $(fzf --preview="bat --style=numbers --color=always {}")'
-alias fzfnm='nvim $(fzf -m --preview="bat --style=numbers --color=always {}")'
+# Workspace metadata helpers
+
+wsmn() {
+    local files
+    files=$(fd meta.yaml ~/workspace \
+        | fzf -m \
+          --preview 'yq {} | bat --language=yaml --style=full --color=always')
+
+    [[ -z "$files" ]] && return
+
+    echo "$files" | xargs nvim
+}
+
+wsms() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: wsms <search-term>"
+        return 1
+    fi
+
+    rg -l "$1" ~/workspace/**/meta.yaml \
+    | fzf -m \
+      --preview 'yq {} | bat --language=yaml --style=full --color=always' \
+    | xargs nvim
+}
 
 # Pomodoro Timer - https://github.com/caarlos0/timer
 # brew install caarlos0/tap/timer
@@ -79,6 +100,4 @@ export NVM_DIR="$HOME/.nvm"
 # ~/.zshrc
 eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
 eval "$(zoxide init zsh)"
-export PATH="$HOME/bin:$PATH"
